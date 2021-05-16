@@ -1,26 +1,12 @@
-'''
-Contact Tracker
+""" Test code submission for GoodRx
 
-You’re tasked with designing and building the core functionality of a new professional contact management solution (think something like LinkedIn).
+This main file runs a command line interface (CLI) menu that emulates a new
+contact management solution. By default, there are 6 users.
 
-Implement the necessary object models and the utility methods as specified in the requirements below, using object oriented programming concepts where appropriate. There are no specific language requirements, but the code should be syntactically correct.
-Requirements
-Be able to represent users
-Users have the following properties:
-Name (first and last)
-A profile image
-A location associated with the user
-Be able to represent connections between users
-Connections between users are bi-directional
-Provide a method to calculate the degrees of separation between two users
-If a user isn’t connected to another user, return -1
-Example:
-If U1 is connected to U2, and U2 is connected to U3
-U1 is 1 degree of separation from U2, and 2 degrees of separation from U3
-U2 is 1 degree of separation from U3
-'''
 
-from test import *
+"""
+
+from test import users
 from graph import *
 
 # for testing
@@ -59,7 +45,8 @@ while query_choice < 0:
         break
 
     if menu_choice == '1':
-        print(f'list of all users: {sorted(users.keys())}')
+        print(f'list of all users: {sorted(users.keys())}\n')
+        continue
 
     if menu_choice == '2':
         user_choice = entry_validation()
@@ -80,11 +67,12 @@ while query_choice < 0:
         name2 = entry_validation()
         if not name2:
             continue
+        str_answer = f'{name1} and {name2} are not connected\n'
         for friend in users[name2].connections:
             if users[name1].name == friend.name:
-                print(f'{name1} and {name2} are connected :)\n')
+                str_answer = f'{name1} and {name2} are connected :)\n'
                 break
-        print(f'{name1} and {name2} are not connected\n')
+        print(str_answer)
         continue
 
     if menu_choice == '5':
@@ -97,3 +85,6 @@ while query_choice < 0:
         user1 = users[name1]
         user2 = users[name2]
         min_degree_of_separation(user1, user2)
+        continue
+
+    print('menu choice not available!\n')

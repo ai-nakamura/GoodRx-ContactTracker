@@ -1,8 +1,16 @@
-# bfs algorithm to find minimum degree of separation between 2 users
+""" Minimum degree of separation
+
+This is a breadth first search (BFS) algorithm used to find the degrees of
+separation between two users.
+
+Adapted from: https://betterprogramming.pub/5-ways-to-find-the-shortest-path-in-a-graph-88cfefd0030f
+
+"""
+
+
 def min_degree_of_separation(src_user, destination_user):
     checked_users = set()
-    queue = []
-    queue.append([src_user, 0])
+    queue = [[src_user, 0]]
     checked_users.add(src_user)
 
     while queue:
