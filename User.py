@@ -13,5 +13,11 @@ class User:
               f'connections: {[connect.name for connect in self.connections]}\n'
               )
 
+    def print_connections(self):
+        friends = []
+        for connection in self.connections:
+            friends.append(connection.name)
+        print(self.name + ' has these friends: ' + str(friends))
+
     def add_connection(self, new_connection):
         self.connections.append(new_connection)
