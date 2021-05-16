@@ -35,13 +35,17 @@ make_connection('rebecca', ['jo'])
 
 # CLI menu
 
-print('welcome to connectEd!\nPlease choose from the following options:')
+print("****************")
+print('Welcome to connectEd! Home of your connections :)\n' +
+      'Please choose from the following options:'
+      )
 query_choice = -1
 while query_choice < 0:
     menu_choice = input(
             '1. See list of all users\n' +
-            '2. Check if two users are friends\n' +
+            '2. See all info about a user\n' +
             '3. See a user\'s connections\n' +
+            '4. Check if two users are direct friends\n' +
             'Q: quit\n' +
             'Please enter an option: '
         )
@@ -50,9 +54,18 @@ while query_choice < 0:
         break
 
     if menu_choice == '1':
-        print(sorted(users.keys()))
+        print(f'list of all users: {sorted(users.keys())}')
 
     if menu_choice == '2':
+        user_choice = input('please enter a user\'s name\n').lower()
+        users[user_choice].print_info()
+
+    if menu_choice == '3':
+        user_choice = input('please enter a user\'s name\n').lower()
+        see_connections(user_choice)
+        continue
+
+    if menu_choice == '4':
         name1 = input('name1\n').lower()
         if name1 not in users:
             print(name1 + ' does not exist\n')
@@ -67,9 +80,3 @@ while query_choice < 0:
                     print("they're friends!\n")
                     break
         continue
-
-    if menu_choice == '3':
-        user_choice = input('please enter a user\'s name\n').lower()
-        see_connections(user_choice)
-        continue
-
