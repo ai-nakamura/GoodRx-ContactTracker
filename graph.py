@@ -1,21 +1,28 @@
 # bfs algorithm to find minimum degree of separation between 2 users
-def min_degree_of_separation(user_1, user_2):
-    queue = set()
-    queue.add(user_1)
-    checked_users = {}
-    distance = 1
+def min_degree_of_separation(src_user, destination_user):
+    checked_users = set()
+    queue = []
+    queue.append([src_user, 0])
+    checked_users.add(src_user)
 
-    # go to users[users[user_2].connections].connections
     while queue:
-        # take all of user_1's connections and check those
-        checking = queue.pop()
-        for connection in checking.connections:
-            if connection.name == user_2.name:
-                break
-            if connection not in checked_users:
-                queue.add(connection)
-                distance += 1
+        user, dist = queue.pop()
+        if user.name == destination_user.name:
+            degrees = 'degrees'
+            if dist == 1:
+                degrees = 'degree'
+            print(
+                f'{src_user.name} and {destination_user.name} '
+                f'have {dist} {degrees} of separation\n'
+            )
+            return dist
+
+        for connect in user.connections:
+            if connect not in checked_users:
+                queue.append([connect, dist + 1])
+                checked_users.add(connect)
     print(
-        user_1.name + ' found at ' + str(distance) +
-        ' degrees from ' + user_2.name + '\n'
+        f'{src_user.name} and {destination_user.name}'
+        f' have no connections\n'
     )
+    return -1

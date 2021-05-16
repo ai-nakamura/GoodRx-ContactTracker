@@ -49,10 +49,11 @@ while query_choice < 0:
         '2. See all info about a user\n' +
         '3. See a user\'s connections\n' +
         '4. Check if two users are direct friends\n' +
-        '(5. Find degrees of separation--under construction)\n' +
+        '5. Find degrees of separation between two users\n' +
         'Q: quit\n' +
         'Please enter an option: '
-    )
+    ).lower()
+
     if menu_choice == 'q':
         print('have a nice day!')
         break
@@ -87,7 +88,12 @@ while query_choice < 0:
         continue
 
     if menu_choice == '5':
-        print('hard-checking separation between Lars and Connie')
-        user1 = users['lars']
-        user2 = users['connie']
+        name1 = entry_validation()
+        if not name1:
+            continue
+        name2 = entry_validation()
+        if not name2:
+            continue
+        user1 = users[name1]
+        user2 = users[name2]
         min_degree_of_separation(user1, user2)

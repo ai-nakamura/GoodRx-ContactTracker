@@ -17,7 +17,7 @@ class User:
         friends = []
         for connection in self.connections:
             friends.append(connection.name)
-        print(self.name + ' has these friends: ' + str(friends))
+        print(self.name + ' has these friends: ' + str(friends) + '\n')
 
     def add_connection(self, new_connection):
         self.connections.append(new_connection)
